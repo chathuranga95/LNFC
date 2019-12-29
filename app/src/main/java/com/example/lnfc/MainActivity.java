@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         txtNum = findViewById(R.id.txtNum);
 
         cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+        getSupportActionBar().hide();
     }
 
     private void startSensorRead() {
@@ -77,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendInp(View view) {
         String testPattern = txtNum.getText().toString();
-        FlashFlicker flicker = new FlashFlicker(cameraManager, testPattern, 50);
+        String encoded = Util.encode(testPattern);
+        Log.d(TAG, "Encoded: " + encoded);
+        FlashFlicker flicker = new FlashFlicker(cameraManager, encoded, 50);
 
 //            final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 //            executorService.scheduleAtFixedRate(flicker, 0, 1, TimeUnit.MILLISECONDS);
